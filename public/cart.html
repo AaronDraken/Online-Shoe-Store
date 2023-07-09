@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Shoes Cart</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">          
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"rel="stylesheet"/>
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css"rel="stylesheet"/>
+    <!-- MDB -->
+    <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+    crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+
+    <style>
+      body {
+       cursor: url(img/cursor.png), pointer;
+      }
+
+      @media (min-width: 1025px) {
+        .h-custom {
+        height: 100vh !important;
+        }
+      }
+    </style>  
+
+</head>
+<body>
+        <!-- Navbar -->
+		    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light ">
+          <!-- Container wrapper -->
+            <div class="container-fluid">
+                <!-- Toggle button -->
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-mdb-toggle="collapse"
+                  data-mdb-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <i class="fas fa-bars"></i>
+                </button>
+          
+                <!-- Collapsible wrapper -->
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost:3000/">
+                      <img
+                        src="img/logo.png"
+                        height="35"
+                        alt="MDB Logo"
+                        loading="lazy"/>
+                    </a>
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                          <a class="nav-link" href="http://localhost:3000/">Home</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="http://localhost:3000/Products">Products</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:3000/PrivacyPolicy">Policy</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="http://localhost:3000/ContactUs">Contact Us</a>
+                      </li>
+                      </ul>
+                    <!-- Left links -->
+                  </div>
+                <!-- Collapsible wrapper -->
+      
+                <!-- Right elements -->
+                  <div class="d-flex align-items-center">
+                    <!-- Icon -->
+                      <a class="text-reset me-3" href="http://localhost:3000/MyCart">
+                        <i class="fas fa-shopping-cart"></i>
+                      </a>
+              
+                  
+                      <!-- Avatar -->
+                      <div class="dropdown">
+                        <a
+                          class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                          href="http://localhost:3000/MyCart"
+                          id="navbarDropdownMenuAvatar"
+                          role="button"
+                          data-mdb-toggle="dropdown"
+                          aria-expanded="false">
+                          <img
+                            src="img/log.png"
+                            class="rounded-circle"
+                            height="35"
+                            alt="Profile"
+                            loading="lazy"
+                          />
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                          <li>
+                            <a class="dropdown-item" href="http://localhost:3000/UserDashboard">My profile</a>
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="http://localhost:3000/MyOrders">Orders</a>
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="http://localhost:3000/">Logout</a>
+                          </li>
+                        </ul>
+                      </div>
+                  </div>
+                <!-- Right elements -->
+              </div>
+          <!-- Container wrapper -->
+        </nav>
+      <!-- Navbar -->
+
+        <!-- Cart -->
+        <section class="h-100" style="background-color: #eee;">
+          <div class="container h-100 py-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col-10">
+        
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
+                </div>
+        
+                <div id="cart-items">
+                </div>
+
+                </div>
+        
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Cart -->
+        <script>
+          let uid=sessionStorage.getItem("CurrentUser");
+
+          if(sessionStorage.getItem("CurrentUser") !== null){
+          $.ajax({
+            url: "http://localhost:3000/userCart",
+            type: "GET",
+            data: { uid:uid },
+            success: function (data) {
+              // console.log(data);
+              if (data.length > 0) {
+                let tableData = '';
+                data.map(d => {
+                  tableData = `${tableData}<div class="card rounded-3 mb-4">
+                    <div class="card-body p-5">
+                      <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-md-2 col-lg-2 col-xl-2">
+                          <img
+                            src="${d.img}"
+                            class="img-fluid rounded-3" alt="Power Shoes">
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-3">
+                          <p class="lead fw-normal mb-2">${d.pname}</p>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                          <button class="btn btn-link px-2" value="${d.cid}" onclick="dec(this)"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                            <i class="fas fa-minus"></i>
+                          </button>
+
+                          <input id="quantity" min="0" name="quantity" value="${d.quantity}" type="number"
+                            class="form-control form-control-sm" />
+
+                          <button class="btn btn-link px-2" value="${d.cid}" onclick="inc(this)"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                            <i class="fas fa-plus"></i>
+                          </button>
+                        </div>
+                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                          <h5 class="mb-0">${d.price}</h5>
+                        </div>
+                        <div class="col-md-1 col-lg-1 col-xl-2  text-end">
+                          <button type="button" class="btn btn-primary mb-2" value="${d.cid}" onclick="buy(this)">Buy Now</button>
+                          <button type="button" class="btn btn-danger" value="${d.cid}" onclick="getId(this)">&#160;  Delete &#160;</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>`;
+                })
+                $("#cart-items").html(tableData);
+                } else {
+                  $("#cart-items").html("<tr><td colspan=4></td></tr>");
+                }
+            }
+          })
+        } else{
+          alert("Please Login to First");
+          window.location.assign("/Login");
+        }
+
+      function getId(obj){
+        let cid=obj.value;
+          $.ajax({
+            url: "http://localhost:3000/deleteCart",
+            type: "POST",
+            data: { cid:cid },
+            success:function(data){
+              alert("Item Removed Successfully");
+              location.reload(true);
+            }
+          })
+      }
+
+      function buy(obj){
+        let cid=obj.value;
+          window.location.assign("/Checkout?cid="+cid);
+      }
+
+      function dec(obj){
+        let cid=obj.value;
+        let qty=document.getElementById("quantity").value;
+        let quantity=qty-1;
+
+        $.ajax({
+          url: "http://localhost:3000/updateCart",
+          type: "POST",
+          data: { cid:cid , quantity:quantity},
+          success:function(data){
+            location.reload(true);
+          }
+        });
+      }
+
+      function inc(obj){
+        let cid=obj.value;
+        let qty=document.getElementById("quantity").value;
+        let quantity=qty+1;
+
+        $.ajax({
+          url: "http://localhost:3000/updateCart",
+          type: "POST",
+          data: { cid:cid , quantity:quantity},
+          success:function(data){
+            location.reload(true);
+          }
+        });
+      }
+
+
+      $('#logout').click(function(){
+        sessionStorage.clear();
+        alert("You have logged out, See you soon!");
+        window.location.assign("/");
+      });
+
+
+
+        </script>
+</body>
+</html>

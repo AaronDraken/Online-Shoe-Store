@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login Panel</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">          
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">         
+
+    <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"rel="stylesheet"/>
+    <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"rel="stylesheet"/>
+    <!-- MDB -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css"rel="stylesheet"/>
+
+      <!-- MDB -->
+        <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+
+</head>
+<body>
+   <div>
+    <section class="vh-100" style="background: url(https://www.chucksconnection.com/articles/bunch19.jpg);">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+      
+                  <h2 class="mb-5">Login</h2>
+      
+                  <div class="form-outline mb-6" >
+                    <input type="email" class="form-control form-control-lg"  id="username"/>
+                    <label class="form-label" for="typeEmailX-2">Email</label>
+                  </div>
+      
+                  <div class="form-outline mb-6">
+                    <input type="password" class="form-control form-control-lg"  id="password"/>
+                    <label class="form-label" for="typePasswordX-2">Password</label>
+                  </div>
+      
+                  <!-- Checkbox -->
+                  <div class="form-check d-flex justify-content-start mb-6">
+                    <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
+                    <label class="form-check-label" for="form1Example3"> Remember password </label>
+                  </div>
+      
+                  <button class="btn btn-primary btn-lg btn-block" type="submit" id="btnLogin">Login</button>
+            
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+   </div>
+
+   <script>
+    $('#btnLogin').click(function () {
+      let username = $('#username').val();
+      let password = $('#password').val();
+      sessionStorage.clear();
+
+      $.ajax({
+        url: 'http://localhost:3000/authenticateAdmin',
+        type: 'POST',
+        data: {'username':username},
+        success: function(response){
+          if(response.msg=='fail'){
+            console.log(response);
+            alert('Invalid user, please enter valid username and password');
+          }
+          else{
+              if (password==response.admin_details.password) {
+                sessionStorage.setItem("CurrentAdmin", response.admin_details._id);
+                console.log(sessionStorage.getItem("CurrentAdmin"));
+                window.location.assign("/AdminDashboard?aid="+response.admin_details._id);
+              } else{
+                alert('Invalid user, please enter valid username and password');
+              }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

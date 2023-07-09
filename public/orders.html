@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Shoes Products</title>
+
+  <!-- All links -->
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet" />
+  <!-- MDB -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+  <!-- <link rel="stylesheet" href="style.css">  -->
+  <style>
+    body {
+      cursor: url(img/cursor.png), pointer;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light ">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost:3000/">
+          <img src="img/logo.png" height="35" alt="MDB Logo" loading="lazy" />
+        </a>
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:3000/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:3000/Products">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:3000/PrivacyPolicy">Policy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:3000/ContactUs">Contact Us</a>
+          </li>
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+
+      <!-- Right elements -->
+      <div class="d-flex align-items-center">
+        <!-- Icon -->
+        <a class="text-reset me-3" href="http://localhost:3000/MyCart">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+
+
+        <!-- Avatar -->
+        <div class="dropdown">
+          <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="http://localhost:3000/MyCart"
+            id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+            <img src="img/log.png" class="rounded-circle" height="35" alt="Profile" loading="lazy" />
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+            <li>
+              <a class="dropdown-item" href="http://localhost:3000/UserDashboard">My profile</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="http://localhost:3000/MyOrders">Orders</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="http://localhost:3000/">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+
+  <!-- Order -->
+  <section class="vh-90">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-90">
+        <div class="col"><br>
+          <p><span class="h2">Orders</span>
+
+          
+            <div id="orderTableBody"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Order -->
+  <script>
+    let uid=sessionStorage.getItem("CurrentUser");
+    $.ajax({
+      url: "http://localhost:3000/userOrders",
+      type: "GET",
+      data: { uid },
+      success: function (data) {
+        if (data.length > 0) {
+          let tableData = '';
+          data.map(d => {
+            tableData = `${tableData}<div class="container card mb-5">
+                    <div class="card-body p-4">
+                      <div class="row align-items-center">
+                        <div class="col-md-2">
+                          <img src="${d.pimage}"
+                            class="img-fluid" alt="Generic placeholder image">
+                        </div>
+                        <div class="col-md-2 d-flex justify-content-center">
+                          <div>
+                            <p class="small text-muted mb-4 pb-2">Name</p>
+                            <p class="lead fw-normal mb-0">${d.pname}</p>
+                          </div>
+                        </div>
+                        <div class="col-md-2 d-flex justify-content-center">
+                          <div>
+                            <p class="small text-muted mb-4 pb-2">Quantity</p>
+                            <p class="lead fw-normal mb-0">${d.quantity}</p>
+                          </div>
+                        </div>
+                        <div class="col-md-2 d-flex justify-content-center">
+                          <div>
+                            <p class="small text-muted mb-4 pb-2">Price</p>
+                            <p class="lead fw-normal mb-0">${d.price}</p>
+                          </div>
+                        </div>
+                        <div class="col-md-2 d-flex justify-content-center">
+                          <div>
+                            <p class="small text-muted mb-4 pb-2">Total</p>
+                            <p class="lead fw-normal mb-0">${d.total}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>`;
+          })
+          $("#orderTableBody").html(tableData);
+        } else {
+          $("#orderTableBody").html("<tr><td colspan=4></td></tr>");
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

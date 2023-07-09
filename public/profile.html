@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+                                                                                        <!-- All links -->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">          
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"rel="stylesheet"/>
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css"rel="stylesheet"/>
+    <!-- MDB -->
+    <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <title>Power Shoes Profile</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light ">
+      <!-- Container wrapper -->
+        <div class="container-fluid">
+            <!-- Toggle button -->
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-mdb-toggle="collapse"
+              data-mdb-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+              <i class="fas fa-bars"></i>
+            </button>
+      
+            <!-- Collapsible wrapper -->
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar brand -->
+                <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost:3000/">
+                  <img
+                    src="img/logo.png"
+                    height="35"
+                    alt="MDB Logo"
+                    loading="lazy"/>
+                </a>
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                      <a class="nav-link" href="http://localhost:3000/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="http://localhost:3000/Products">Products</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="http://localhost:3000/PrivacyPolicy">Policy</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="http://localhost:3000/ContactUs">Contact Us</a>
+                  </li>
+                </ul>
+                <!-- Left links -->
+              </div>
+            <!-- Collapsible wrapper -->
+  
+            <!-- Right elements -->
+              <div class="d-flex align-items-center">
+                <!-- Icon -->
+                  <a class="text-reset me-3" href="http://localhost:3000/MyCart">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+          
+              
+                  <!-- Avatar -->
+                  <div class="dropdown">
+                    <a
+                      class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                      href="http://localhost:3000/MyCart"
+                      id="navbarDropdownMenuAvatar"
+                      role="button"
+                      data-mdb-toggle="dropdown"
+                      aria-expanded="false">
+                      <img
+                        src="img/log.png"
+                        class="rounded-circle"
+                        height="35"
+                        alt="Profile"
+                        loading="lazy"
+                      />
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                      <li>
+                        <a class="dropdown-item" href="http://localhost:3000/UserDashboard">My profile</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="http://localhost:3000/MyOrders">Orders</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" id="logout">Logout</a>
+                      </li>
+                    </ul>
+                  </div>
+              </div>
+            <!-- Right elements -->
+          </div>
+      <!-- Container wrapper -->
+    </nav>
+  <!-- Navbar -->
+
+    <!-- profile -->
+        <section style="background-color: #eee;" >
+            <div class="container py-5">
+        
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card mb-4">
+                            <div class="card-body text-center">
+                                <img src="img/log.png" alt="avatar"
+                                    class="rounded-circle img-fluid" style="width: 150px;">
+                                <h5 class="my-3" id="name2"></h5>
+                                <div class="d-grid gap-2 d-md-block">
+                                  <button class="btn btn-primary" type="button" id="edit" onclick="edit()">EDIT</button>
+                                  <button class="btn btn-success" type="button" id="save" onclick="save()" style="visibility: hidden;">SAVE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Full Name</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0" id="name" contenteditable='false'></p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Email</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0" id="email" contenteditable='false'></p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Phone</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0" id="phone" contenteditable='false'></p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Address</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0" id="address" contenteditable='false'></p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Joined Date</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-muted mb-0" id="createdAt"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- profile -->
+
+    <!-- Order -->
+    <section class="vh-90" style="background-color: #eee;">
+        <div class="container h-100" >
+            <div class="row d-flex justify-content-center align-items-center h-90">
+              <div class="col"><br>
+                  <p><span class="h2">Orders</span></p>
+                  <p class="text-end" ><span ><a href="http://localhost:3000/MyOrders" >View All....</a></span></p>
+
+                  <div id="ordersRecent" class="justify-content-center"></div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+  <!-- Order -->
+
+  <script>
+      let uid=sessionStorage.getItem("CurrentUser");
+
+      if(sessionStorage.getItem("CurrentUser") !== null){
+        $.ajax({
+          url: "http://localhost:3000/UserDetails",
+          type: "GET",
+          data:{"uid":uid},
+          success: function (response) {
+            $("#name").text(response.user_details.name);
+            $("#name2").text(response.user_details.name);
+            $("#email").text(response.user_details.email);
+            $("#phone").text(response.user_details.contact);
+            $("#address").text(response.user_details.address);
+            $("#createdAt").text(response.user_details.createdAt);
+          }
+        });
+
+        $.ajax({
+            url: "http://localhost:3000/latestOrders",
+            type: "GET",
+            data:{uid:uid},
+            success: function (response){
+              if(response.msg=='fail'){
+                $("#ordersRecent").html("Sorry, no previous orders exist.");
+              } else{
+                if (response.length > 0) {
+                  let tableData = '';
+                  response.map(d => {
+                    tableData = `${tableData}<div class="card mb-4 ">
+                        <div class="card-body p-4">
+
+                          <div class="row align-items-center">
+                            <div class="col-md-2">
+                              <img src="${d.img}" id="img" class="img-fluid" alt="Generic placeholder image">
+                            </div>
+                            <div class="col-md-2 d-flex justify-content-end">
+                              <div>
+                                <p class="small text-muted mb-4 pb-2">Name</p>
+                                <p class="lead fw-normal mb-0" id="pname">${d.pname}</p>
+                              </div>
+                            </div>
+                            <div class="col-md-2 d-flex justify-content-center">
+                              <div>
+                                <p class="small text-muted mb-4 pb-2">Price</p>
+                                <p class="lead fw-normal mb-0" id="price">${d.price}</p>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>`;
+                  })
+                  $("#ordersRecent").html(tableData);
+                } else {
+                  $("#ordersRecent").html("<tr><td colspan=4></td></tr>");
+                }
+              }
+            }
+            });
+        } else{
+          alert("Please Login to First");
+          window.location.assign("/Login");
+        }
+
+        function edit(){
+          document.getElementById('edit').style.visibility='hidden';
+          document.getElementById('save').style.visibility='visible';
+
+          $('#name').attr('contenteditable', true);
+          $('#email').attr('contenteditable', true);
+          $('#address').attr('contenteditable', true);
+          $('#phone').attr('contenteditable', true);
+        }
+
+        function save(){
+          document.getElementById('save').style.visibility='hidden';
+          document.getElementById('edit').style.visibility='visible';
+
+          $('#name').attr('contenteditable', false);
+          $('#email').attr('contenteditable', false);
+          $('#address').attr('contenteditable', false);
+          $('#phone').attr('contenteditable', false);
+        }
+
+        $('#save').click(function(){
+          let name=document.getElementById('name').textContent;
+          let email=document.getElementById('email').textContent;
+          let phone=document.getElementById('phone').textContent;
+          let address=document.getElementById('address').textContent;
+
+          $.ajax({
+          url: "http://localhost:3000/updateUser",
+          type: "POST",
+          data:{"uid":uid,"name":name, "email":email, "phone":phone, "address":address},
+          success: function (response) {
+            if(response.status==200){
+              alert("Your profile has been updated!");
+            } else{
+              alert("Some Error occured. Please try again later.");
+            }
+          }
+          });
+        });
+
+        $('#logout').click(function(){
+          sessionStorage.clear();
+          alert("You have logged out, See you soon!")
+          window.location.assign("/");
+        });
+  </script>
+</body>
+</html>

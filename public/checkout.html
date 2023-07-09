@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Shoes Checkout !!</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">          
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"rel="stylesheet"/>
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css"rel="stylesheet"/>
+    <!-- MDB -->
+    <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+    crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <style>
+      body {
+       cursor: url(img/cursor.png), pointer;
+      }
+
+      @media (min-width: 1025px) {
+        .h-custom {
+        height: 100vh !important;
+        }
+        }
+    </style>  
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light ">
+        <!-- Container wrapper -->
+          <div class="container-fluid">
+              <!-- Toggle button -->
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+              </button>
+        
+              <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <!-- Navbar brand -->
+                  <a class="navbar-brand mt-2 mt-lg-0" href="http://localhost:3000/">
+                    <img
+                      src="img/logo.png"
+                      height="35"
+                      alt="MDB Logo"
+                      loading="lazy"/>
+                  </a>
+                  <!-- Left links -->
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:3000/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:3000/Products">Products</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="http://localhost:3000/PrivacyPolicy">Policy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:3000/ContactUs">Contact Us</a>
+                    </li>
+                    </ul>
+                  <!-- Left links -->
+                </div>
+              <!-- Collapsible wrapper -->
+    
+              <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                  <!-- Icon -->
+                    <a class="text-reset me-3" href="http://localhost:3000/MyCart">
+                      <i class="fas fa-shopping-cart"></i>
+                    </a>
+            
+                
+                    <!-- Avatar -->
+                    <div class="dropdown">
+                      <a
+                        class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                        href="http://localhost:3000/MyCart"
+                        id="navbarDropdownMenuAvatar"
+                        role="button"
+                        data-mdb-toggle="dropdown"
+                        aria-expanded="false">
+                        <img
+                          src="img/log.png"
+                          class="rounded-circle"
+                          height="35"
+                          alt="Profile"
+                          loading="lazy"
+                        />
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                        <li>
+                          <a class="dropdown-item" href="http://localhost:3000/UserDashboard">My profile</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="http://localhost:3000/MyOrders">Orders</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="http://localhost:3000/">Logout</a>
+                        </li>
+                      </ul>
+                    </div>
+                </div>
+              <!-- Right elements -->
+            </div>
+        <!-- Container wrapper -->
+      </nav>
+    <!-- Navbar -->
+
+    <!-- checkout -->
+        <section>
+            <div class="row" style="margin: 50px;">
+
+                <div class="col-lg-7">
+                    <h5 class="mb-3"><a href="http://localhost:3000/Products" class="text-body"><i
+                        class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
+                    <hr>
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <p class="mb-1">Shopping cart</p>
+                        </div>
+                    </div>
+                    <div id="item">
+                    </div>
+                </div>
+                <div class="col-lg-5">
+
+                    <div class="card bg-mute text-black rounded-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="mb-0">Card details</h5>
+                            </div>
+
+                            <p class="small mb-2">Card type</p>
+                            <a href="#!" type="submit" class="text-black"><i
+                                class="fab fa-cc-mastercard fa-2x me-2"></i></a>
+                            <a href="#!" type="submit" class="text-black"><i
+                                class="fab fa-cc-visa fa-2x me-2"></i></a>
+                            <a href="#!" type="submit" class="text-black"><i
+                                class="fab fa-cc-amex fa-2x me-2"></i></a>
+                            <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-paypal fa-2x"></i></a>
+
+                            <form class="mt-4">
+                            <div class="form-outline-black form-black mb-4">
+                                <input type="text" id="name" class="form-control form-control-lg" siez="17"
+                                placeholder="Cardholder's Name" />
+                            </div>
+
+                            <div class="form-outline-black form-black mb-4">
+                                <input type="text" id="cardNo" class="form-control form-control-lg" siez="17"
+                                placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
+                                
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                <div class="form-outline-black form-black">
+                                    <input type="text" id="typeExp" class="form-control form-control-lg"
+                                    placeholder="MM/YYYY" size="7" id="exp" minlength="7" maxlength="7" />
+                                </div>
+                                </div>
+                                <div class="col-md-6">
+                                <div class="form-outline-black form-black">
+                                    <input type="password" id="typeText" class="form-control form-control-lg"
+                                    placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                                </div>
+                                </div>
+                            </div>
+
+                            </form>
+
+                            <hr class="my-4">
+
+                            <div class="d-flex justify-content-between">
+                            <p class="mb-2">Price</p>
+                            <p class="mb-2" id="price"></p>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                            <p class="mb-2">Quantity</p>
+                            <p class="mb-2" id="quantity"></p>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-4">
+                            <p class="mb-2">Total</p>
+                            <p class="mb-2" id="total"></p>
+                            </div>
+
+                            <button type="button" class="btn btn-primary  btn-lg" id="checkout">
+                            <div class="d-flex justify-content-between">
+                                <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                            </div>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    <!-- checkout -->
+    <script>
+      let urls=location.href;
+      let params=urls.split("?")[1];
+      let cid=params.split("=")[1];
+      // console.log("cid",cid);
+      let uid=sessionStorage.getItem("CurrentUser");
+
+      $("#checkout").click(function(){
+        let amount=document.getElementById('total').textContent;
+        let cardNo=document.getElementById('cardNo').value;
+
+        $.ajax({
+        url: "http://localhost:3000/addTransaction",
+        type: "POST",
+        data: { uid:uid, amount:amount,cardNo:cardNo },
+        success: function (data) {
+          
+          if(data.status==200){
+            alert("Purchase Complete!");
+            window.location.assign('/Products');
+          } else{
+            alert('Transaction Failed. Try again later');
+          }
+        }
+        });
+      });
+
+      $.ajax({
+        url: "http://localhost:3000/cartDetails?cid="+cid,
+        type: "GET",
+        success: function (data) {
+          console.log("res-----",data);
+          let d=data;
+          // if (data.length > 0) {
+            let tableData = '';
+            // data.map(d => {
+              tableData = `${tableData}<div class="card mb-3 mb-lg-0">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                              <div class="d-flex flex-row align-items-center">
+                                                <div>
+                                                  <img
+                                                      src="${d.img}"
+                                                      class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                                                </div>
+                                                <div class="ms-3">
+                                                  <h5>${d.pname}</h5>
+                                                </div>
+                                              </div>
+                                              <div class="d-flex flex-row align-items-center">
+                                                <div style="width: 50px;">
+                                                  <h5 class="fw-normal mb-0">${d.quantity}</h5>
+                                                </div>
+                                                <div style="width: 80px;">
+                                                  <h5 class="mb-0">₹ ${d.price}</h5>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                      </div>`;
+            // })
+            $("#item").html("₹ "+tableData);
+            $("#price").text("₹ "+data.price);
+            $("#quantity").text(data.quantity);
+            $("#total").text("₹ "+data.price*data.quantity);
+
+            // } else {
+            //   $("#item").html("<h3>Product Doesnt Exist In Your Cart</h3>");
+            // }
+        }
+      })
+    </script>
+</body>
+</html>

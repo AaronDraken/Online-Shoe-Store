@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
+
+  <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+
+  <!----------------------------------------------------------------------------------------------------->
+
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+
+  <!-- My CSS -->
+  <link rel="stylesheet" href="style1.css" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+
+  <!-- MDB -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+  <title>Power Admin Panel</title>
+</head>
+
+<body>
+  <!-- SIDEBAR -->
+  <section id="sidebar">
+    <a href="#" class="brand">
+      <img src="img/logo.png" id="logo" alt="" height="70px" />
+      <span class="text">Power</span>
+    </a>
+    <ul class="side-menu top">
+      <li class="active">
+        <a href="#dashboard">
+          <i class="bx bxs-dashboard"></i>
+          <span class="text">Dashboard</span>
+      </li>
+      </a>
+      <li>
+        <a href="#feedbacks">
+          <i class='bx bx-message-rounded-dots'></i>
+          <span class="text">Feedbacks</span>
+        </a>
+      </li>
+      <li>
+        <a href="#products">
+          <i class='bx bxl-product-hunt'></i>
+          <span class="text">Products</span>
+        </a>
+      </li>
+      <li>
+        <a href="#orders">
+          <i class='bx bxs-cart'></i>
+          <span class="text">Orders</span>
+        </a>
+      </li>
+      <li>
+        <a href="#Transactions">
+          <i class='bx bx-credit-card'></i>
+          <span class="text">Transactions</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+  <!-- SIDEBAR -->
+
+  <!-- CONTENT -->
+  <section id="content">
+    <!-- NAVBAR -->
+    <nav>
+      <i class="bx bx-menu"></i>
+      <form action="#">
+        <div class="form-input">
+          <input type="search" placeholder="Search..." />
+          <button type="submit" class="search-btn">
+            <i class="bx bx-search"></i>
+          </button>
+        </div>
+      </form>
+      <input type="checkbox" id="switch-mode" onclick="logoswitch()" hidden />
+      <label for="switch-mode" class="switch-mode"></label>
+      <a id="logout" class="profile">
+        Log <img src="img/people1.png"> Out
+      </a>
+    </nav>
+    <!-- NAVBAR -->
+
+    <!-- MAIN -->
+    <main>
+      <a name="dashboard"></a>
+      <div class="head-title">
+        <div class="left">
+          <h1>Dashboard</h1>
+        </div>
+      </div>
+
+      <ul class="box-info">
+        <li>
+          <i class="bx bxs-calendar-check"></i>
+          <span class="text">
+            <h3>1020</h3>
+            <p>Total Orders</p>
+          </span>
+        </li>
+        <li>
+          <i class="bx bxs-group"></i>
+          <span class="text">
+            <h3>2834</h3>
+            <p>Product</p>
+          </span>
+        </li>
+      </ul>
+
+
+      <div class="table-data">
+        <div class="user">
+          <div class="head">
+            <h3>User Info</h3>
+            <i class="bx bx-search"></i>
+            <i class="bx bx-filter"></i>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>User id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact No.</th>
+                <th>Address</th>
+                <th>Created At</th>
+              </tr>
+            </thead>
+            <tbody id="customerTableBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <div class="table-data" id="feedbacks">
+        <div class="user">
+          <div class="head">
+            <h3>Feedbacks</h3>
+            <i class="bx bx-search"></i>
+            <i class="bx bx-filter"></i>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Feedbacks/Review</th>
+              </tr>
+            </thead>
+            <tbody id="feedbackTableBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-data" id="products">
+        <div class="user">
+          <div class="head">
+            <h3>Products</h3>
+            <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+              Add Product
+            </button>
+          </div>
+
+
+          <!-- Modal -->
+          <div class="modal top fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" data-mdb-backdrop="true" data-mdb-keyboard="true">
+            <div class="modal-dialog modal-lg ">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                  <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <label for="product-name">Product Name - </label>
+                  <input type="text" id="pname" /><br><br>
+                  <label for="product-name">Price - &#x20B9;</label>
+                  <input type="text" id="price" /><br><br>
+
+                  <label class="form-label" for="customFile">Product Image - </label>
+                  <input type="text" id="customFile" /><br><br>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">CANCEL</button>
+                  <button type="button" class="btn btn-primary" id="addProduct">ADD</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- Modal update -->
+          <div class="modal top fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" data-mdb-backdrop="true" data-mdb-keyboard="true">
+            <div class="modal-dialog modal-lg ">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Update Product</h5>
+                  <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <input type="hidden" id="pid" name="pid">
+                  <label for="product-name">Product Name - </label>
+                  <input type="text" id="Upname" /><br><br>
+                  <label for="product-name">Price - &#x20B9;</label>
+                  <input type="text" id="Uprice" /><br><br>
+
+                  <label class="form-label" for="customFile">Product Image - </label>
+                  <input type="text" id="UcustomFile" /><br><br>
+                  <input type="hidden" id="upimg" /><br><br>
+                  <img src="" id="uimg" width="150px">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">CANCEL</button>
+                  <button type="button" class="btn btn-primary" id="updateProduct">Update</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <table id="prod">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Img</th>
+                <th>Price</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-data" id="orders">
+        <div class="user">
+          <div class="head">
+            <h3>Orders</h3>
+            <i class="bx bx-search"></i>
+            <i class="bx bx-filter"></i>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>User id</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Transactions id</th>
+              </tr>
+            </thead>
+            <tbody id="orderTableBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-data" id="Transactions">
+        <div class="user">
+          <div class="head">
+            <h3>Transactions</h3>
+            <i class="bx bx-search"></i>
+            <i class="bx bx-filter"></i>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>User id</th>
+                <th>Transactions id</th>
+                <th>Amount</th>
+                <th>Card No.</th>
+                <th>Transactions Date</th>
+              </tr>
+            </thead>
+            <tbody id="transactionTableBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </main>
+    <!-- MAIN -->
+
+    <script src="script.js"></script>
+    <script>
+      let aid=sessionStorage.getItem("CurrentAdmin");
+
+      if(sessionStorage.getItem("CurrentAdmin") !== null){
+        "Welcome Admin!!"
+      } else{
+          alert("Please Login First");
+          window.location.assign("/AdminLogin");
+      }
+
+
+      $.ajax({
+        url: "http://localhost:3000/allUsers",
+        type: "GET",
+        success: function (data) {
+          console.log(data);
+          if (data.length > 0) {
+            let tableData = '';
+            data.map(d => {
+              tableData = `${tableData}<tr><td contenteditable='false'>${d._id}</td><td contenteditable='false'>${d.name}</td><td contenteditable='false'>${d.email}</td><td contenteditable='false'>${d.contact}</td><td>${d.address}</td><td>${d.createdAt}</td></tr>`;
+            })
+            $("#customerTableBody").html(tableData);
+          } else {
+            $("#customerTableBody").html("<tr><td colspan=4></td></tr>");
+          }
+        }
+      })
+
+      // $.ajax({
+      //   url: "http://localhost:3000/allProducts",
+      //   type: "GET",
+      //   success: function (data) {
+      //     console.log(data);
+      //     if (data.length > 0) {
+      //       let tableData = '';
+      //       data.map(d => {
+      //         tableData = `${tableData}<tr><td class="pid">${d._id}</td><td class="pname">${d.pname}</td><td><img src="${d.img}" style="width:90px;"></td><td class="price">${d.price}</td><td><h3><a class="edit" onclick="getId(this)" id='${d._id}' data-mdb-toggle="modal" data-mdb-target="#updateModal"><i class="bx bxs-edit"></i> </a>| <a class="delete"><i class="bx bx-x-circle"></i></a></h3></td></tr>`;
+      //       });
+      //       $("#productTableBody").html(tableData);
+      //     } else {
+      //       $("#productTableBody").html("<tr><td colspan=4></td></tr>");
+      //     }
+      //   }
+      // });
+
+      //       $(document).ready(function () {
+      //       $('#prod').DataTable({
+      //         scrollY: '200px',
+      //         scrollCollapse: true,
+      //         paging: false,
+      //     });
+      // });
+
+      // $("#prod").ready(function () {
+      //   $('#prod').DataTable();
+      // });
+      $(document).ready(function () {
+        $('#prod').DataTable({
+          ajax: 'http://localhost:3000/allProductsData',
+          "columns": [
+            { "data": "_id" },
+            { "data": "pname" },
+            {
+              "data": "img",
+              "render": function (data) {
+                return '<img src="' + data + '" width="40px">';
+              }
+            },
+            { "data": "price" },
+            {
+              "data": null,
+              "defaultContent": '<i class="bx bxs-edit" data-mdb-toggle="modal" data-mdb-target="#updateModal"/>',
+              "orderable": false
+            },
+            {
+              "data": null,
+              "defaultContent": '<a class="delete"><i class="bx bx-x-circle"/></a>',
+              "orderable": false
+            }
+          ]
+        });
+      });
+      let pid="";
+      // Edit product
+      $('#prod').on('click', '.bxs-edit', function (e) {
+        let parentTr = $(this).parent().parent();
+        pid = parentTr.find("td:eq(0)").text();
+        let name = parentTr.find("td:eq(1)").text();
+        let img = parentTr.find("img").attr("src");
+        let price = parentTr.find("td:eq(3)").text();
+        $("#pid").val(pid);
+        $("#Upname").val(name);
+        $("#uimg").attr("src",img);
+        $("#Uprice").val(price);
+        $("#upimg").val(img);
+      });
+      $("#prod").on("click", ".delete", function (e) {
+        let parentTr = $(this).parent().parent();
+        let pid = parentTr.find("td:eq(0)").text();
+        $.ajax({
+          url: "http://localhost:3000/deleteProduct",
+          type: "DELETE",
+          data: { pid: pid },
+          success: function (response) {
+            console.log(response);
+            if (response.status == 200) {
+              alert('Product Deleted');
+              window.location.reload();
+            } else {
+              alert('Error occured, please check logs');
+            }
+          }
+        })
+        window.location.reload();
+      });
+
+      $('#addProduct').click(function () {
+        let pname = $('#pname').val();
+        let price = $('#price').val();
+        let img = $('#customFile').val();
+        $.ajax({
+          url: "http://localhost:3000/addProduct",
+          type: "POST",
+          data: { 'pname': pname, 'price': price, 'img': img },
+          success: function (response) {
+            if (response.status == 200) {
+              alert("Product added Successfully!");
+            }
+            else {
+              alert("Some error occurred, Check server logs");
+            }
+          }
+        })
+      })
+
+      // function getId(obj) {
+      //   let pid = obj.id;
+      // }
+
+      $('#updateProduct').click(function () {
+        let pname = $('#Upname').val();
+        console.log(pname);
+        let price = $('#Uprice').val();
+        let img = $('#UcustomFile').val();
+        $.ajax({
+          url: "http://localhost:3000/updateProduct",
+          type: "POST",
+          data: { 'pid': pid, 'pname': pname, 'price': price, 'img': img },
+          success: function (response) {
+            if (response.status == 200) {
+              alert("Product Updated Successfully!");
+            }
+            else {
+              alert("Some error occurred, Check server logs");
+            }
+          }
+        })
+      })
+
+      $.ajax({
+        url: "http://localhost:3000/allFeedbacks",
+        type: "GET",
+        success: function (data) {
+          console.log(data);
+          if (data.length > 0) {
+            let tableData = '';
+            data.map(d => {
+              tableData = `${tableData}<tr><td>${d.name}</td><td>${d.email}</td><td>${d.feedback}</td></tr>`;
+            })
+            $("#feedbackTableBody").html(tableData);
+          } else {
+            $("#feedbackTableBody").html("<tr><td colspan=4></td></tr>");
+          }
+        }
+      })
+
+      $.ajax({
+        url: "http://localhost:3000/allTransactions",
+        type: "GET",
+        success: function (data) {
+          console.log(data);
+          if (data.length > 0) {
+            let tableData = '';
+            data.map(d => {
+              tableData = `${tableData}<tr><td>${d._id}</td><td>${d.uid}</td><td>${d.amount}</td><td>${d.cardNo}</td><td>${d.transactionDate}</td></tr>`;
+            })
+            $("#transactionTableBody").html(tableData);
+          } else {
+            $("#transactionTableBody").html("<tr><td colspan=4></td></tr>");
+          }
+        }
+      })
+
+      $.ajax({
+        url: "http://localhost:3000/allOrders",
+        type: "GET",
+        success: function (data) {
+          console.log(data);
+          if (data.length > 0) {
+            let tableData = '';
+            data.map(d => {
+              tableData = `${tableData}<tr><td>${d.pid}</td><td>${d.quantity}</td><td>${d.price}</td><td>${d.total}</td><td>${d.tid}</td></tr>`;
+            })
+            $("#orderTableBody").html(tableData);
+          } else {
+            $("#orderTableBody").html("<tr><td colspan=4></td></tr>");
+          }
+        }
+      })
+
+      $('#logout').click(function(){
+        sessionStorage.clear();
+        alert("You have logged out, See you soon!")
+        window.location.assign("/AdminLogin");
+      });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Power Shoes Login</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="login.css">
+                
+        <!-- Boxicons CSS -->
+        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+                        
+        <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    </head>
+    <body>
+        <section class="container forms">
+            <div class="form login">
+                <div class="form-content">
+                    <header>Login</header>
+                    <!-- <form> -->
+                        <div class="field input-field">
+                            <input type="email" placeholder="Email" class="input" id="username">
+                        </div>
+
+                        <div class="field input-field">
+                            <input type="password" placeholder="Password" class="password" id="password">
+                            <i class='bx bx-hide eye-icon'></i>
+                        </div>
+
+                        <div class="form-link">
+                            <a href="#" class="forgot-pass">Forgot password?</a>
+                        </div>
+
+                        <div class="field button-field">
+                            <button type="button" id="btn-login">Login</button>
+                        </div>
+                    <!-- </form> -->
+
+                    <div class="form-link">
+                        <span>Don't have an account? <a href="#" class="link signup-link">Signup</a></span>
+                    </div>
+                </div>
+
+                <!-- <div class="line"></div>
+
+                <div class="media-options">
+                    <a href="#" class="field facebook">
+                        <i class='bx bxl-facebook facebook-icon'></i>
+                        <span>Login with Facebook</span>
+                    </a>
+                </div>
+
+                <div class="media-options">
+                    <a href="#" class="field google">
+                        <img src="#" alt="" class="google-img">
+                        <span>Login with Google</span>
+                    </a>
+                </div> -->
+
+            </div>
+
+            <!-- Signup Form -->
+
+            <div class="form signup">
+                <div class="form-content">
+                    <header>Signup</header>
+                    <!-- <form> -->
+                        <div class="field input-field">
+                            <input type="name" placeholder="Name" class="input" id="name">
+                        </div>
+
+                        <div class="field input-field">
+                            <input type="number" placeholder="Contact" class="input" id="contact">
+                        </div>
+
+                        <div class="field input-field">
+                            <input type="email" placeholder="Email" class="input" id="email">
+                        </div>
+                        
+						<div class="field input-field">
+                            <input type="text" placeholder="Address" class="input" id="address">
+                        </div>
+
+                        <div class="field input-field">
+                            <input type="password" placeholder="Create password" class="password" id="rpassword">
+                        </div>
+
+                        <div class="field input-field">
+                            <input type="password" placeholder="Confirm password" class="password" id="confirmp">
+                            <i class='bx bx-hide eye-icon'></i>
+                        </div>
+
+                        <div class="field button-field">
+                            <button id="btn-register">Signup</button>
+                        </div>
+                    <!-- </form> -->
+
+                    <div class="form-link">
+                        <span>Already have an account? <a href="#" class="link login-link">Login</a></span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- JavaScript -->
+        <script src="UserScript.js"></script>
+        <script>
+            $('#btn-register').click(function () {
+                let name = $('#name').val();
+                let contact = $('#contact').val();
+                let address = $('#address').val();
+                let email = $('#email').val();
+                let password = $('#rpassword').val();
+                let confirm = $('#confirmp').val();
+
+                if (password!=confirm) {
+                    alert('Password and Confirm password not same')
+                } else {
+                    $.ajax({
+                        url: 'http://localhost:3000/addUser',
+                        type: 'POST',
+                        data: { name:name, email: email, contact:contact, address: address, password: password },
+                        success: function (response) {
+                            console.log(response);
+                            if (response.msg == 'Customer created successfuly') {
+                                alert('Account Created, Proceed to Login');
+                            } else {
+                                alert('Unable to create account due to unknown error');
+                            }
+                        },
+                    });
+                }
+            });
+
+            $('#btn-login').click(function () {
+                let username = $('#username').val();
+                let password = $('#password').val();
+                sessionStorage.clear();
+
+                $.ajax({
+                    url: 'http://localhost:3000/authenticateUser',
+                    type: 'POST',
+                    data: {'username':username},
+                    success: function(response){
+                        console.log(response);
+                        if(response.msg=='success'){
+                            if (password==response.user_details.password) {
+                                sessionStorage.setItem("CurrentUser", response.user_details._id);
+                                console.log(sessionStorage.getItem("CurrentUser"));
+                                window.location.assign("/UserDashboard");
+                            }
+                        } else{
+                                alert('Invalid user, please enter valid username and password');
+                        }
+                    }
+                });
+            });
+
+        </script>
+    </body>
+</html>
